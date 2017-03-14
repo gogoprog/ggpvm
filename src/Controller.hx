@@ -15,7 +15,8 @@ class Controller
         program.main = new Func();
 
         program.main.addInstruction(Instruction.Set(0, 8));
-        program.main.addInstruction(Instruction.Add(0, 4));
+        program.main.addInstruction(Instruction.Set(1, 4));
+        program.main.addInstruction(Instruction.Add(0, 1));
         program.main.addInstruction(Instruction.PrintValue(0));
         program.main.addInstruction(Instruction.Set(0, 97));
         program.main.addInstruction(Instruction.WriteChar(0));

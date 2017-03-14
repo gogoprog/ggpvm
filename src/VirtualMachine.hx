@@ -67,9 +67,9 @@ class VirtualMachine
                 context.registers[r] = v;
             }
 
-            case Add(r, v):
+            case Add(r, r2):
             {
-                context.registers[r] += v;
+                context.registers[r] += context.registers[r2];
             }
 
             case PrintValue(r):
@@ -87,6 +87,29 @@ class VirtualMachine
                 var i = context.registers[r];
                 stack.push(program.funcs[i]);
                 cursors.push(-1);
+            }
+
+            case JumpIf(r1, r2):
+            {
+                var v = context.registers[r1];
+                var pos = context.registers[r2];
+
+                if(v != 0)
+                {
+                    cursors[cursors.length - 1] = pos - 1;
+                }
+            }
+
+            case Compare(r1, r2):
+            {
+                var a = context.registers[r1];
+                var b = context.registers[r2];
+
+                context.registers[r1] = ((a == b) ? 1 : 0);
+            }
+
+            case Noop:
+            {
             }
         }
     }

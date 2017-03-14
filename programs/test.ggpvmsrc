@@ -10,6 +10,9 @@
     WriteChar 0
 
 @show_eee
+    Set 1 -5
+    Set 2 1
+    Add 1 2
     Set 0 101
     WriteChar 0
     Set 0 101
@@ -18,6 +21,12 @@
     WriteChar 0
     Set 0 10
     WriteChar 0
+    Compare 2 1
+    Set 0 16
+    JumpIf 2 0
+    Set 0 1
+    JumpIf 0 0
+    Noop
 
 @main
     Set 0 6
