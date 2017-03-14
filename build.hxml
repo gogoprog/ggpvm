@@ -1,0 +1,6 @@
+-main Main.hx
+-neko out/ggpvm.n
+-cp src/
+-debug
+-D NO_PRECOMPILED_HEADERS
+-D linux
