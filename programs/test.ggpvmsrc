@@ -1,17 +1,32 @@
-Set 0 6
-PrintValue 0
-Set 1 0
-Call 1
 
-Set 1 0
-Call 1
+@show_abc
+    Set 0 97
+    WriteChar 0
+    Set 0 98
+    WriteChar 0
+    Set 0 99
+    WriteChar 0
+    Set 0 10
+    WriteChar 0
 
-@
-Set 0 97
-WriteChar 0
-Set 0 98
-WriteChar 0
-Set 0 99
-WriteChar 0
-Set 0 10
-WriteChar 0
+@show_eee
+    Set 0 101
+    WriteChar 0
+    Set 0 101
+    WriteChar 0
+    Set 0 101
+    WriteChar 0
+    Set 0 10
+    WriteChar 0
+
+@main
+    Set 0 6
+    PrintValue 0
+    Set 1 0
+    Call 1
+
+    Set 1 @show_abc
+    Call 1
+
+    Set 0 @show_eee
+    Call 0

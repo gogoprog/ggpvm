@@ -3,8 +3,9 @@ class Compiler
     static public function compile(input:String):Program
     {
         var program = new Program();
+        var funcAliases = new Array<String>();
         var lines = input.split('\n');
-        
+
         program.main = new Func();
         var func = program.main;
 
@@ -24,8 +25,13 @@ class Compiler
 
             if(first != "" && first != null)
             {
-                if(first.charAt(0) == "@")
+                if(first == "@main")
                 {
+                    func = program.main;
+                }
+                else if(first.charAt(0) == "@")
+                {
+                    funcAliases.push(first);
                     func = new Func();
                     program.funcs.push(func);
                 }
@@ -33,7 +39,14 @@ class Compiler
                 {
                     for(p in parts)
                     {
-                        args.push(Std.parseInt(p));
+                        if(p.charAt(0) == "@")
+                        {
+                            args.push(funcAliases.indexOf(p));
+                        }
+                        else
+                        {
+                            args.push(Std.parseInt(p));
+                        }
                     }
 
                     var inst = Type.createEnum(Instruction, first, args);
