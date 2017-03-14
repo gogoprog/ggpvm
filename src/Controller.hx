@@ -40,6 +40,23 @@ class Controller
         program.main.addInstruction(Instruction.Call(0));
     }
 
+    public function loadProgram(filename:String)
+    {
+        var content:String;
+
+        try
+        {
+            content = sys.io.File.getContent(filename);
+        }
+        catch(e:Dynamic)
+        {
+            Sys.stdout().writeString("[ggpvm] cannot load file.\n");
+            return;
+        }
+
+        program = Compiler.compile(content);
+    }
+
     public function resetContext()
     {
         context = new Context();
@@ -47,11 +64,14 @@ class Controller
 
     public function run()
     {
-        vm.load(program, context);
-
-        while(vm.running)
+        if(program != null)
         {
-            vm.advance(1);
+            vm.load(program, context);
+
+            while(vm.running)
+            {
+                vm.advance(1);
+            }
         }
     }
 }

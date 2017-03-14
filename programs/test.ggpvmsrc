@@ -1,0 +1,17 @@
+Set 0 6
+PrintValue 0
+Set 1 0
+Call 1
+
+Set 1 0
+Call 1
+
+@
+Set 0 97
+WriteChar 0
+Set 0 98
+WriteChar 0
+Set 0 99
+WriteChar 0
+Set 0 10
+WriteChar 0
