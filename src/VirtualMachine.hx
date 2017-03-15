@@ -75,7 +75,7 @@ class VirtualMachine
 
             case Add(r, r2):
             {
-                context.registers[context.outRegisterIndex] += context.registers[r] + context.registers[r2];
+                context.registers[context.outRegisterIndex] = context.registers[r] + context.registers[r2];
             }
 
             case PrintValue(r):

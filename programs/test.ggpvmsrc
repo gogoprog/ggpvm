@@ -27,16 +27,10 @@
     Set 3 20
     JumpIf 2 3
     Set 0 1
-    PrintValue 1
     JumpIf 0 0
     Noop
 
 @main
-    Set 0 6
-    PrintValue 0
-    Set 1 0
-    Call 1
-
     Set 1 @show_abc
     Call 1
 
