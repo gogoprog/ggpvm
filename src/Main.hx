@@ -15,8 +15,8 @@ class Main
         }
         else
         {
-            Sys.stdout().writeString("[ggpvm] generating random program...\n");
-            controller.generateProgram();
+            Sys.stdout().writeString("[ggpvm] No input program.\n");
+            return;
         }
 
         controller.resetContext();

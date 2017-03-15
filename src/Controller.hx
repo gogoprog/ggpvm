@@ -9,38 +9,6 @@ class Controller
     {
     }
 
-    public function generateProgram()
-    {
-        program = new Program();
-        program.main = new Func();
-
-        program.main.addInstruction(Instruction.Set(0, 8));
-        program.main.addInstruction(Instruction.Set(1, 4));
-        program.main.addInstruction(Instruction.Add(0, 1));
-        program.main.addInstruction(Instruction.PrintValue(0));
-        program.main.addInstruction(Instruction.Set(0, 97));
-        program.main.addInstruction(Instruction.WriteChar(0));
-        program.main.addInstruction(Instruction.Set(0, 10));
-        program.main.addInstruction(Instruction.WriteChar(0));
-
-        var func = new Func();
-
-        func.addInstruction(Instruction.Set(0, 97));
-        func.addInstruction(Instruction.WriteChar(0));
-        func.addInstruction(Instruction.WriteChar(0));
-        func.addInstruction(Instruction.Set(0, 10));
-        func.addInstruction(Instruction.WriteChar(0));
-
-        program.funcs.push(func);
-
-        program.main.addInstruction(Instruction.Set(0, 0));
-        program.main.addInstruction(Instruction.Call(0));
-        program.main.addInstruction(Instruction.Set(0, 0));
-        program.main.addInstruction(Instruction.Call(0));
-        program.main.addInstruction(Instruction.Set(0, 0));
-        program.main.addInstruction(Instruction.Call(0));
-    }
-
     public function loadProgram(filename:String)
     {
         var content:String;
@@ -69,10 +37,22 @@ class Controller
         {
             vm.load(program, context);
 
-            while(vm.running)
-            {
-                vm.advance(1);
-            }
+            step();
+        }
+    }
+
+    public function step()
+    {
+        if(vm.running)
+        {
+            vm.advance(1);
+
+            haxe.Timer.delay(
+                function()
+                {
+                    step();
+                },
+                100);
         }
     }
 }

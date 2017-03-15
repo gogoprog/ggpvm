@@ -7,6 +7,7 @@ class VirtualMachine
     private var context:Context;
 
     public var running = false;
+    public var debugging = false;
 
     public function new()
     {
@@ -67,9 +68,14 @@ class VirtualMachine
                 context.registers[r] = v;
             }
 
+            case Out(r):
+            {
+                context.outRegisterIndex = r;
+            }
+
             case Add(r, r2):
             {
-                context.registers[r] += context.registers[r2];
+                context.registers[context.outRegisterIndex] += context.registers[r] + context.registers[r2];
             }
 
             case PrintValue(r):
@@ -105,7 +111,7 @@ class VirtualMachine
                 var a = context.registers[r1];
                 var b = context.registers[r2];
 
-                context.registers[r1] = ((a == b) ? 1 : 0);
+                context.registers[context.outRegisterIndex] = ((a == b) ? 1 : 0);
             }
 
             case Noop:
